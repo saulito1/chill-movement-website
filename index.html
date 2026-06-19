@@ -428,7 +428,8 @@
       <h2 class="mem-h rv d1">Something <em>big</em><br>is coming.</h2>
       <p class="mem-sub rv d2">Join the waitlist and be among the first founding members of Chill Movement. Gain access to the most exclusive spaces and events in Singapore.</p>
       <div class="rv d2 ml-wrap">
-        <form class="ml-block-form wl-form" action="https://assets.mailerlite.com/jsonp/1877307/forms/190680213097547513/subscribe" data-code="" method="post" target="_blank">
+        <form class="ml-block-form wl-form" action="https://assets.mailerlite.com/jsonp/1877307/forms/190680213097547513/subscribe" data-code="" method="post" onsubmit="handleWaitlist(event)">
+          <input type="text" name="fields[name]" placeholder="Your name" required/>
           <input aria-label="email" aria-required="true" type="email" name="fields[email]" placeholder="Your email" required/>
           <input type="hidden" name="ml-submit" value="1"/>
           <input type="hidden" name="anticsrf" value="true"/>
@@ -577,32 +578,24 @@
     });
   }
 
-  const ML_API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiYTRlODhkMmExYmRkZTQ3YTIyN2M0M2Y5OWQ2NTM5OTkxNTJiZTkwODBkYTIzMmFkZDI4NzE3YjlhNGY5MzM4YTA2ZWE2Y2M0NDhjZGZlODYiLCJpYXQiOjE3ODE4NDQ1NjIuMjAzOTc2LCJuYmYiOjE3ODE4NDQ1NjIuMjAzOTc5LCJleHAiOjQ5Mzc1MTgxNjIuMjAwNDQ5LCJzdWIiOiIyMTUzOTAwIiwic2NvcGVzIjpbXX0.VFlF_FWna8btrKV5zt3M3sSv75ZjvNAmbj2dvLO7dHhOr98WApNHZ7jgadnIRHR-FeGcA7RpzrxuZNT4cj_gz0r8YA5dwXBhvY_D01efRaE3QwXV6f7kj2QAEe5BIC_GnrFUJ44BtOxS9PF2gCmjztuKr9n6vZnjdCF3tr92yQz9Vaipqgvf3LShOKNbsMtww_RcEr0LugCw4J2af2tCnleAkA1GsXY6ryq_LQ6BCNMoYAi7o2LMbExyOViYDGe-Z6AgkjShnWoJL4Q6n2KMv-nM5SWGLRTSid0dkD3IKExUenhLGAs3LboKan82yyDC3Kr4MNf8N_K341WKN9fQE2bwzB-DJvuArdyM8r2GzL5fVLjDMPzbw1rtcwZavbcPRO8RaJtmVBYXkhjBfyA0VhWYAsmkHVCtQ5oJMtN03hSdbMohPgWaujqTStnao6-gyLeZ5Q5pfuVhyvqf6SJNsN6kHdKIBZRcWpIn8U4Xv8oEcqimh6p6U4BwTMQrND4obtuFpUhvqXPdlb7VVQvTomjAkBsAgt7kufCI8o_yHgoD-TXfFdlPHVRpuVL8-usB4Pl7wBfNwBSdWFlzdyLXgT4YmpPWthjrc_CUmwWKTIMedQTiwOsCHGRYSh4reAkdYKjENeA0l_peUNPVd_oyUfnFclz4FzT6tEQjF2XN-ok';
-  const ML_GROUP_ID = '190677947655390266';
-
-  async function subscribeML(name, email) {
-    const res = await fetch('https://connect.mailerlite.com/api/subscribers', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + ML_API_KEY
-      },
-      body: JSON.stringify({ email: email, fields: { name: name }, groups: [ML_GROUP_ID] })
-    });
-    return res.status === 200 || res.status === 201;
-  }
-
   async function handleWaitlist(e){
     e.preventDefault();
     const btn = e.target.querySelector('button[type="submit"]');
-    const name = e.target.querySelector('input[type="text"]').value;
-    const email = e.target.querySelector('input[type="email"]').value;
-    btn.textContent = 'Submitting...'; btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+    const formData = new FormData(e.target);
     try {
-      const ok = await subscribeML(name, email);
-      if(ok){ document.getElementById('wl-ok').style.display='block'; e.target.reset(); }
-      else { btn.textContent = 'Secure My Spot'; btn.disabled = false; }
-    } catch(err){ btn.textContent = 'Secure My Spot'; btn.disabled = false; }
+      const res = await fetch('https://assets.mailerlite.com/jsonp/1877307/forms/190680213097547513/subscribe', {
+        method: 'POST',
+        body: formData
+      });
+      document.querySelector('.ml-block-form').style.display = 'none';
+      document.getElementById('wl-ok').style.display = 'block';
+    } catch(err){
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
   }
 
   async function handleContact(e){
