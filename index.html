@@ -3,7 +3,30 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chill Movement — Singapore</title>
+  <title>Chill Movement — Singapore's Leading Social Wellness Movement</title>
+  <meta name="description" content="Chill Movement is Singapore's leading social wellness movement. We bring humans together through health, fitness and shared values. Epic events, exclusive spaces, real community."/>
+  <meta name="keywords" content="chill movement, singapore wellness, fitness community singapore, social wellness, health events singapore, ice bath singapore"/>
+  <meta name="author" content="Chill Movement"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://www.chillmovement.sg"/>
+
+  <!-- Open Graph — how it looks when shared on WhatsApp, Instagram, Facebook -->
+  <meta property="og:title" content="Chill Movement — Singapore's Leading Social Wellness Movement"/>
+  <meta property="og:description" content="Be part of the future of connection. Epic events, exclusive spaces, real community. Singapore's leading social wellness movement."/>
+  <meta property="og:url" content="https://www.chillmovement.sg"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://www.chillmovement.sg/og-image.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Chill Movement"/>
+  <meta property="og:locale" content="en_SG"/>
+
+  <!-- Twitter/X card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Chill Movement — Singapore's Leading Social Wellness Movement"/>
+  <meta name="twitter:description" content="Be part of the future of connection. Epic events, exclusive spaces, real community."/>
+  <meta name="twitter:image" content="https://www.chillmovement.sg/og-image.jpg"/>
+
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -492,10 +515,10 @@
     <span class="ct-eyebrow rv">Get In Touch</span>
     <h2 class="ct-h rv d1">Let's <em>talk.</em></h2>
     <p class="ct-sub rv d2">Partnerships, events, or just want to connect — drop us a message.</p>
-    <form class="ct-form rv d2" onsubmit="handleContact(event)">
-      <input type="text" placeholder="Your name" required/>
-      <input type="email" placeholder="Your email" required/>
-      <textarea rows="4" placeholder="Your message"></textarea>
+    <form class="ct-form rv d2" onsubmit="handleContact(event)" accept-charset="UTF-8">
+      <input type="text" name="name" placeholder="Your name" required/>
+      <input type="email" name="email" placeholder="Your email" required/>
+      <textarea rows="4" name="message" placeholder="Your message"></textarea>
       <button type="submit" class="btn btn-b" style="width:100%;text-align:center;">Send Message</button>
       <div class="ct-success" id="ct-ok">Thanks! We'll get back to you soon.</div>
     </form>
@@ -551,15 +574,52 @@
     });
   }
 
-  function handleWaitlist(e){
-    e.preventDefault();
-    document.getElementById('wl-ok').style.display='block';
-    e.target.reset();
+  const ML_API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiYTRlODhkMmExYmRkZTQ3YTIyN2M0M2Y5OWQ2NTM5OTkxNTJiZTkwODBkYTIzMmFkZDI4NzE3YjlhNGY5MzM4YTA2ZWE2Y2M0NDhjZGZlODYiLCJpYXQiOjE3ODE4NDQ1NjIuMjAzOTc2LCJuYmYiOjE3ODE4NDQ1NjIuMjAzOTc5LCJleHAiOjQ5Mzc1MTgxNjIuMjAwNDQ5LCJzdWIiOiIyMTUzOTAwIiwic2NvcGVzIjpbXX0.VFlF_FWna8btrKV5zt3M3sSv75ZjvNAmbj2dvLO7dHhOr98WApNHZ7jgadnIRHR-FeGcA7RpzrxuZNT4cj_gz0r8YA5dwXBhvY_D01efRaE3QwXV6f7kj2QAEe5BIC_GnrFUJ44BtOxS9PF2gCmjztuKr9n6vZnjdCF3tr92yQz9Vaipqgvf3LShOKNbsMtww_RcEr0LugCw4J2af2tCnleAkA1GsXY6ryq_LQ6BCNMoYAi7o2LMbExyOViYDGe-Z6AgkjShnWoJL4Q6n2KMv-nM5SWGLRTSid0dkD3IKExUenhLGAs3LboKan82yyDC3Kr4MNf8N_K341WKN9fQE2bwzB-DJvuArdyM8r2GzL5fVLjDMPzbw1rtcwZavbcPRO8RaJtmVBYXkhjBfyA0VhWYAsmkHVCtQ5oJMtN03hSdbMohPgWaujqTStnao6-gyLeZ5Q5pfuVhyvqf6SJNsN6kHdKIBZRcWpIn8U4Xv8oEcqimh6p6U4BwTMQrND4obtuFpUhvqXPdlb7VVQvTomjAkBsAgt7kufCI8o_yHgoD-TXfFdlPHVRpuVL8-usB4Pl7wBfNwBSdWFlzdyLXgT4YmpPWthjrc_CUmwWKTIMedQTiwOsCHGRYSh4reAkdYKjENeA0l_peUNPVd_oyUfnFclz4FzT6tEQjF2XN-ok';
+  const ML_GROUP_ID = '190677947655390266';
+
+  async function subscribeML(name, email) {
+    const res = await fetch('https://connect.mailerlite.com/api/subscribers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + ML_API_KEY
+      },
+      body: JSON.stringify({ email: email, fields: { name: name }, groups: [ML_GROUP_ID] })
+    });
+    return res.status === 200 || res.status === 201;
   }
-  function handleContact(e){
+
+  async function handleWaitlist(e){
     e.preventDefault();
-    document.getElementById('ct-ok').style.display='block';
-    e.target.reset();
+    const btn = e.target.querySelector('button[type="submit"]');
+    const name = e.target.querySelector('input[type="text"]').value;
+    const email = e.target.querySelector('input[type="email"]').value;
+    btn.textContent = 'Submitting...'; btn.disabled = true;
+    try {
+      const ok = await subscribeML(name, email);
+      if(ok){ document.getElementById('wl-ok').style.display='block'; e.target.reset(); }
+      else { btn.textContent = 'Secure My Spot'; btn.disabled = false; }
+    } catch(err){ btn.textContent = 'Secure My Spot'; btn.disabled = false; }
+  }
+
+  async function handleContact(e){
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    const data = new FormData(e.target);
+    btn.textContent = 'Sending...'; btn.disabled = true;
+    try {
+      const res = await fetch('https://formspree.io/f/xlgkykyq', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if(res.ok){
+        document.getElementById('ct-ok').style.display='block';
+        e.target.reset();
+      } else {
+        btn.textContent = 'Send Message'; btn.disabled = false;
+      }
+    } catch(err){ btn.textContent = 'Send Message'; btn.disabled = false; }
   }
 </script>
 </body>
