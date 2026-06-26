@@ -374,12 +374,138 @@
     }
     .ev-placeholder p{font-size:14px;font-weight:300;color:var(--mid);margin-bottom:36px;line-height:1.7;}
 
+    /* ── EVENTS SCROLL ── */
+    /* 3D Event Poster */
+    .ev-poster-scene{
+      flex-shrink:0;
+      perspective:1200px;
+      padding:20px 10px 20px 0;
+    }
+    .ev-poster-card{
+      display:block;
+      width:280px;
+      border-radius:16px;
+      overflow:hidden;
+      position:relative;
+      text-decoration:none;
+      transform-style:preserve-3d;
+      animation:posterFloat 8s ease-in-out infinite;
+      box-shadow:
+        0 40px 80px rgba(0,0,0,0.25),
+        0 15px 30px rgba(0,0,0,0.15);
+      cursor:pointer;
+      transition:box-shadow 0.3s;
+    }
+    .ev-poster-card img{
+      width:100%;display:block;
+      border-radius:16px;
+    }
+    .ev-poster-shine{
+      position:absolute;inset:0;
+      border-radius:16px;
+      background:linear-gradient(135deg,rgba(255,255,255,0.15) 0%,transparent 50%,rgba(0,0,0,0.1) 100%);
+      pointer-events:none;
+    }
+    .ev-poster-badge{
+      position:absolute;bottom:16px;left:50%;
+      transform:translateX(-50%);
+      background:var(--white);color:var(--black);
+      font-size:10px;font-weight:600;letter-spacing:0.12em;
+      text-transform:uppercase;padding:10px 22px;border-radius:999px;
+      white-space:nowrap;
+      box-shadow:0 4px 20px rgba(0,0,0,0.3);
+    }
+    @keyframes posterFloat{
+      0%,100%{transform:rotateX(4deg) rotateY(-8deg) translateY(0px);}
+      25%{transform:rotateX(2deg) rotateY(6deg) translateY(-12px);}
+      50%{transform:rotateX(5deg) rotateY(-3deg) translateY(-8px);}
+      75%{transform:rotateX(1deg) rotateY(7deg) translateY(-14px);}
+    }
+
+    .ev-scroll-wrap{
+      position:relative;
+      overflow:hidden;
+    }
+    .ev-scroll{
+      display:flex;
+      gap:20px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      padding-bottom:8px;
+    }
+    .ev-scroll::-webkit-scrollbar{display:none;}
+    .ev-card{
+      flex-shrink:0;
+      width:300px;
+      border-radius:16px;
+      overflow:hidden;
+      scroll-snap-align:start;
+      background:var(--cream);
+      transition:transform 0.3s ease,box-shadow 0.3s ease;
+      text-decoration:none;
+      color:var(--black);
+      display:block;
+    }
+    .ev-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.12);}
+    .ev-card-img{
+      width:300px;
+      height:300px;
+      overflow:hidden;
+      position:relative;
+    }
+    .ev-card-img img{
+      width:100%;height:100%;
+      object-fit:cover;display:block;
+    }
+    .ev-badge{
+      position:absolute;top:14px;left:14px;
+      background:var(--black);color:var(--white);
+      font-size:9px;font-weight:500;letter-spacing:0.12em;
+      text-transform:uppercase;padding:6px 12px;border-radius:999px;
+    }
+    .ev-current{ opacity:1; }
+    .ev-past{
+      opacity:0.45;
+      filter:grayscale(30%);
+      pointer-events:none;
+    }
+    .ev-card-info{
+      padding:20px 22px 24px;
+    }
+    .ev-card-label{
+      font-size:9px;font-weight:500;letter-spacing:0.2em;
+      text-transform:uppercase;color:var(--mid);
+      display:block;margin-bottom:6px;
+    }
+    .ev-card-info h3{
+      font-family:-apple-system,'Helvetica Neue',sans-serif;
+      font-size:18px;font-weight:300;
+      color:var(--black);margin-bottom:4px;
+      letter-spacing:-0.01em;
+    }
+    .ev-card-info p{
+      font-size:12px;font-weight:400;
+      color:var(--mid);letter-spacing:0.04em;
+    }
+    .ev-scroll-hint{
+      text-align:right;
+      font-size:10px;font-weight:400;letter-spacing:0.1em;
+      color:var(--mid);margin-top:16px;
+      text-transform:uppercase;
+    }
+    @media(max-width:900px){
+      .ev-card{width:260px;}
+      .ev-card-img{width:260px;height:260px;}
+    }
+
     /* ── PARTNERS ── */
     #partners{background:var(--black);padding:100px 0;overflow:hidden;}
     .pt-label{
       text-align:center;font-size:10px;font-weight:500;
       letter-spacing:0.28em;text-transform:uppercase;
-      color:rgba(255,255,255,0.15);margin-bottom:52px;
+      color:rgba(255,255,255,0.35);margin-bottom:40px;
     }
     .mq-outer{overflow:hidden;white-space:nowrap;position:relative;}
     .mq-outer::before,.mq-outer::after{
@@ -391,15 +517,105 @@
     .mq-track:hover{animation-play-state:paused;}
     .p-slot{
       display:inline-flex;align-items:center;justify-content:center;
-      width:180px;height:72px;margin:0 2px;
-      border:1px solid rgba(255,255,255,0.05);border-radius:6px;flex-shrink:0;
-      transition:border-color 0.3s;
+      width:auto;min-width:160px;height:64px;margin:0 4px;padding:0 32px;
+      border:1px solid rgba(255,255,255,0.12);border-radius:6px;flex-shrink:0;
+      transition:border-color 0.3s,background 0.3s;
     }
-    .p-slot:hover{border-color:rgba(255,255,255,0.12);}
-    .p-slot span{font-size:11px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.15);}
+    .p-slot:hover{border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.05);}
+    .p-slot span{font-size:13px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.75);transition:color 0.2s;}
+    .p-slot:hover span{color:var(--white);}
     @keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
     .pt-cta{text-align:center;margin-top:64px;padding:0 52px;}
     .pt-cta p{font-size:14px;font-weight:300;color:rgba(255,255,255,0.3);margin-bottom:24px;line-height:1.7;}
+
+    /* ── WORK WITH US ── */
+    .work-with-us{
+      padding:120px 52px 80px;
+      max-width:1100px;
+      margin:0 auto;
+    }
+    .wwu-eyebrow{
+      display:block;
+      font-size:10px;font-weight:500;letter-spacing:0.3em;
+      text-transform:uppercase;color:rgba(255,255,255,0.3);
+      margin-bottom:20px;
+    }
+    .wwu-heading{
+      font-family:-apple-system,'Helvetica Neue',sans-serif;
+      font-size:clamp(36px,5vw,64px);font-weight:200;
+      line-height:1.05;color:var(--white);
+      letter-spacing:-0.01em;margin-bottom:72px;
+    }
+    .wwu-heading em{font-style:italic;color:rgba(255,255,255,0.4);}
+    .wwu-cards{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:2px;
+    }
+    .wwu-card{
+      border:1px solid rgba(255,255,255,0.07);
+      padding:52px 48px;
+      position:relative;
+      transition:border-color 0.3s,background 0.3s;
+      background:rgba(255,255,255,0.01);
+    }
+    .wwu-card:hover{
+      border-color:rgba(255,255,255,0.15);
+      background:rgba(255,255,255,0.03);
+    }
+    .wwu-card-num{
+      font-family:-apple-system,'Helvetica Neue',sans-serif;
+      font-size:11px;font-weight:400;
+      letter-spacing:0.2em;
+      color:rgba(255,255,255,0.2);
+      margin-bottom:32px;
+    }
+    .wwu-card h3{
+      font-family:-apple-system,'Helvetica Neue',sans-serif;
+      font-size:clamp(24px,3vw,36px);font-weight:200;
+      color:var(--white);margin-bottom:12px;
+      letter-spacing:-0.01em;line-height:1.1;
+    }
+    .wwu-card p{
+      font-size:14px;font-weight:300;
+      color:rgba(255,255,255,0.45);
+      line-height:1.7;margin-bottom:36px;
+      max-width:320px;
+    }
+    .wwu-btn{
+      font-size:11px !important;
+      padding:12px 24px !important;
+    }
+    .logo-strip{
+      padding:72px 0 80px;
+      border-top:1px solid rgba(255,255,255,0.06);
+      margin-top:0;
+      background:var(--black);
+    }
+    .b-slot{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:0 48px;height:72px;flex-shrink:0;
+      border-right:1px solid rgba(255,255,255,0.06);
+    }
+    .b-word{
+      font-family:-apple-system,'Helvetica Neue',sans-serif;
+      font-size:22px;font-weight:300;
+      letter-spacing:0.06em;
+      color:rgba(255,255,255,0.5);
+      transition:color 0.3s;
+      text-transform:uppercase;
+    }
+    .b-slot:hover .b-word{ color:rgba(255,255,255,0.9); }
+    .b-ag1{ font-weight:600;letter-spacing:0.04em; }
+    .b-jbl{ font-weight:700;letter-spacing:0.12em; }
+    .b-figma{ font-weight:300;letter-spacing:0.02em; }
+    .b-tential{ font-weight:400;letter-spacing:0.08em; }
+    @media(max-width:900px){
+      .work-with-us{padding:80px 24px 60px;}
+      .wwu-cards{grid-template-columns:1fr;}
+      .wwu-card{padding:40px 28px;}
+      .logo-strip{padding:60px 0 80px;margin-top:40px;}
+    }
 
     /* ── CONTACT ── */
     #contact{background:var(--cream);padding:140px 52px;display:flex;align-items:center;justify-content:center;}
@@ -668,41 +884,160 @@
       <h2 class="ev-h rv">Upcoming<br><em>Events.</em></h2>
       <a href="https://chat.whatsapp.com/FbYTRdGGZMFE7FIA6ZsLe8" class="btn btn-ob rv" target="_blank">Get Notified</a>
     </div>
-    <div class="ev-placeholder rv">
-      <h3>Next event dropping<br>very soon.</h3>
-      <p>Join the community to be the first to know.</p>
-      <a href="https://chat.whatsapp.com/FbYTRdGGZMFE7FIA6ZsLe8" class="btn btn-b" target="_blank">Join the Community</a>
+    <div class="ev-scroll-wrap rv">
+      <div class="ev-scroll" id="evScroll">
+
+        <!-- UPCOMING — 3D floating poster -->
+        <div class="ev-poster-scene">
+          <a href="https://www.yourtessera.com/e/summer-social-series-by-chill-movement?rc=t8x47gp0" 
+             target="_blank" class="ev-poster-card" id="evPoster">
+            <img src="images/poster_9.jpg" alt="Summer Social Series"/>
+            <div class="ev-poster-shine"></div>
+            <div class="ev-poster-badge">Tickets Available ↗</div>
+          </a>
+        </div>
+
+        <!-- PAST EVENTS — faded, most recent first -->
+        <div class="ev-card ev-past">
+          <div class="ev-card-img"><img src="images/poster_8.jpg" alt="Pickle Padel Fiesta"/></div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">Pickle Padel Movement</span>
+            <h3>Pickle Padel Fiesta</h3>
+            <p>18–19 April 2026</p>
+          </div>
+        </div>
+
+        <div class="ev-card ev-past">
+          <div class="ev-card-img"><img src="images/poster_12.jpg" alt="Love is in the Air"/></div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">AIR CCCC</span>
+            <h3>Love is in the Air</h3>
+            <p>28 Feb 2026</p>
+          </div>
+        </div>
+
+        <div class="ev-card ev-past">
+          <div class="ev-card-img"><img src="images/poster_10.jpg" alt="Skyline Sweat"/></div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">Nova Sky Bar</span>
+            <h3>Skyline Sweat</h3>
+            <p>31 Jan 2026</p>
+          </div>
+        </div>
+
+        <div class="ev-card ev-past">
+          <div class="ev-card-img"><img src="images/poster_6.jpg" alt="A Rocky Xmas"/></div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">Boulder Movement</span>
+            <h3>A Rocky Xmas</h3>
+            <p>20 Dec 2025</p>
+          </div>
+        </div>
+
+        <div class="ev-card ev-past">
+          <div class="ev-card-img"><img src="images/poster_3.jpg" alt="The Project Rally"/></div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">Project Rally</span>
+            <h3>The Project Rally</h3>
+            <p>14 Dec 2025</p>
+          </div>
+        </div>
+
+        <div class="ev-card ev-past">
+          <div class="ev-card-img"><img src="images/poster_5.jpg" alt="Chilloween"/></div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">Wheeler's Tropikana</span>
+            <h3>Chilloween</h3>
+            <p>2 Nov 2025</p>
+          </div>
+        </div>
+
+        <div class="ev-card ev-past">
+          <div class="ev-card-img"><img src="images/poster_1.jpg" alt="REVL River Valley 2.0"/></div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">Publico Ristorante</span>
+            <h3>REVL River Valley 2.0</h3>
+            <p>8 Nov 2025</p>
+          </div>
+        </div>
+
+        <div class="ev-card ev-past">
+          <div class="ev-card-img"><img src="images/poster_11.jpg" alt="Pit Stop Recovery"/></div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">Tanjong Beach Club</span>
+            <h3>Pit Stop Recovery</h3>
+            <p>5 Oct 2025</p>
+          </div>
+        </div>
+
+        <div class="ev-card ev-past">
+          <div class="ev-card-img"><img src="images/poster_7.jpg" alt="Strength &amp; Recovery"/></div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">Mortar &amp; Pestle</span>
+            <h3>Strength &amp; Recovery</h3>
+            <p>27 July 2025</p>
+          </div>
+        </div>
+
+        <div class="ev-card ev-past">
+          <div class="ev-card-img"><img src="images/poster_4.jpg" alt="The AM Pool Party"/></div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">Rooftop at QT</span>
+            <h3>The AM Pool Party</h3>
+            <p>12 July 2025</p>
+          </div>
+        </div>
+
+        <div class="ev-card ev-past">
+          <div class="ev-card-img"><img src="images/poster_2.jpg" alt="Social Saturdays"/></div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">Mortar &amp; Pestle</span>
+            <h3>Social Saturdays</h3>
+            <p>21 June 2025</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="ev-scroll-hint">← Scroll to explore past events</div>
     </div>
   </div>
 </section>
 
 <!-- PARTNERS -->
 <section id="partners">
-  <p class="pt-label">Brands we move with</p>
-  <div class="mq-outer">
-    <div class="mq-track">
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
-      <div class="p-slot"><span>Brand Name</span></div>
+
     </div>
   </div>
-  <div class="pt-cta">
-    <p>Interested in partnering with Chill Movement?</p>
-    <a href="#contact" class="btn btn-ow">Become a Partner</a>
+
+  <div class="work-with-us">
+    <div class="wwu-inner rv">
+      <span class="wwu-eyebrow">Work With Us</span>
+      <h2 class="wwu-heading">Let's build<br>something <em>epic.</em></h2>
+    </div>
+
+    <div class="wwu-cards">
+
+      <div class="wwu-card rv d1">
+        <div class="wwu-card-num">01</div>
+        <div class="wwu-card-content">
+          <h3>Brands &amp; Partners</h3>
+          <p>Companies that want to co-create, activate or sponsor.</p>
+          <a href="#contact" class="btn btn-ow wwu-btn">Get In Touch</a>
+        </div>
+      </div>
+
+      <div class="wwu-card rv d2">
+        <div class="wwu-card-num">02</div>
+        <div class="wwu-card-content">
+          <h3>Private Events</h3>
+          <p>We bring the experience. You bring the people.</p>
+          <a href="#contact" class="btn btn-ow wwu-btn">Get In Touch</a>
+        </div>
+      </div>
+
+    </div>
   </div>
+
 </section>
 
 <!-- CONTACT -->
@@ -823,6 +1158,23 @@
         btn.textContent = 'Send Message'; btn.disabled = false;
       }
     } catch(err){ btn.textContent = 'Send Message'; btn.disabled = false; }
+  }
+  // 3D poster tilt
+  const poster = document.getElementById('evPoster');
+  if(poster){
+    poster.addEventListener('mousemove', e => {
+      const r = poster.getBoundingClientRect();
+      const dx = (e.clientX - r.left - r.width/2) / (r.width/2);
+      const dy = (e.clientY - r.top - r.height/2) / (r.height/2);
+      poster.style.animation = 'none';
+      poster.style.transform = `rotateX(${-dy*18}deg) rotateY(${dx*22}deg) translateY(-8px)`;
+      poster.style.boxShadow = `${dx*-20}px ${dy*-20}px 60px rgba(0,0,0,0.3), 0 40px 80px rgba(0,0,0,0.2)`;
+    });
+    poster.addEventListener('mouseleave', () => {
+      poster.style.animation = 'posterFloat 8s ease-in-out infinite';
+      poster.style.transform = '';
+      poster.style.boxShadow = '';
+    });
   }
 </script>
   <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
