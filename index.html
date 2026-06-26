@@ -375,52 +375,6 @@
     .ev-placeholder p{font-size:14px;font-weight:300;color:var(--mid);margin-bottom:36px;line-height:1.7;}
 
     /* ── EVENTS SCROLL ── */
-    /* 3D Event Poster */
-    .ev-poster-scene{
-      flex-shrink:0;
-      perspective:1200px;
-      padding:20px 10px 20px 0;
-    }
-    .ev-poster-card{
-      display:block;
-      width:280px;
-      border-radius:16px;
-      overflow:hidden;
-      position:relative;
-      text-decoration:none;
-      transform-style:preserve-3d;
-      animation:posterFloat 8s ease-in-out infinite;
-      box-shadow:
-        0 40px 80px rgba(0,0,0,0.25),
-        0 15px 30px rgba(0,0,0,0.15);
-      cursor:pointer;
-      transition:box-shadow 0.3s;
-    }
-    .ev-poster-card img{
-      width:100%;display:block;
-      border-radius:16px;
-    }
-    .ev-poster-shine{
-      position:absolute;inset:0;
-      border-radius:16px;
-      background:linear-gradient(135deg,rgba(255,255,255,0.15) 0%,transparent 50%,rgba(0,0,0,0.1) 100%);
-      pointer-events:none;
-    }
-    .ev-poster-badge{
-      position:absolute;bottom:16px;left:50%;
-      transform:translateX(-50%);
-      background:var(--white);color:var(--black);
-      font-size:10px;font-weight:600;letter-spacing:0.12em;
-      text-transform:uppercase;padding:10px 22px;border-radius:999px;
-      white-space:nowrap;
-      box-shadow:0 4px 20px rgba(0,0,0,0.3);
-    }
-    @keyframes posterFloat{
-      0%,100%{transform:rotateX(4deg) rotateY(-8deg) translateY(0px);}
-      25%{transform:rotateX(2deg) rotateY(6deg) translateY(-12px);}
-      50%{transform:rotateX(5deg) rotateY(-3deg) translateY(-8px);}
-      75%{transform:rotateX(1deg) rotateY(7deg) translateY(-14px);}
-    }
 
     .ev-scroll-wrap{
       position:relative;
@@ -438,7 +392,7 @@
     .ev-scroll::-webkit-scrollbar{display:none;}
     .ev-card{
       flex-shrink:0;
-      width:300px;
+      width:260px;
       border-radius:16px;
       overflow:hidden;
       scroll-snap-align:start;
@@ -450,25 +404,28 @@
     }
     .ev-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.12);}
     .ev-card-img{
-      width:300px;
-      height:300px;
+      width:260px;
+      aspect-ratio:4/5;
       overflow:hidden;
       position:relative;
     }
     .ev-card-img img{
       width:100%;height:100%;
-      object-fit:cover;display:block;
+      object-fit:cover;object-position:top;display:block;
     }
     .ev-badge{
-      position:absolute;top:14px;left:14px;
-      background:var(--black);color:var(--white);
-      font-size:9px;font-weight:500;letter-spacing:0.12em;
-      text-transform:uppercase;padding:6px 12px;border-radius:999px;
+      position:absolute;bottom:14px;left:50%;
+      transform:translateX(-50%);
+      background:var(--white);color:var(--black);
+      font-size:9px;font-weight:600;letter-spacing:0.12em;
+      text-transform:uppercase;padding:8px 16px;border-radius:999px;
+      white-space:nowrap;
+      box-shadow:0 4px 16px rgba(0,0,0,0.2);
     }
-    .ev-current{ opacity:1; }
+    .ev-current{ opacity:1; box-shadow:0 8px 40px rgba(0,0,0,0.15); }
     .ev-past{
-      opacity:0.45;
-      filter:grayscale(30%);
+      opacity:0.7;
+      filter:grayscale(15%);
       pointer-events:none;
     }
     .ev-card-info{
@@ -484,6 +441,14 @@
       font-size:18px;font-weight:300;
       color:var(--black);margin-bottom:4px;
       letter-spacing:-0.01em;
+    }
+    .ev-card-bottom{
+      display:flex;align-items:center;justify-content:space-between;margin-top:0;
+    }
+    .ev-ticket-badge{
+      font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+      background:var(--black);color:var(--white);
+      padding:5px 10px;border-radius:999px;white-space:nowrap;
     }
     .ev-card-info p{
       font-size:12px;font-weight:400;
@@ -887,15 +852,20 @@
     <div class="ev-scroll-wrap rv">
       <div class="ev-scroll" id="evScroll">
 
-        <!-- UPCOMING — 3D floating poster -->
-        <div class="ev-poster-scene">
-          <a href="https://www.yourtessera.com/e/summer-social-series-by-chill-movement?rc=t8x47gp0" 
-             target="_blank" class="ev-poster-card" id="evPoster">
+        <!-- UPCOMING -->
+        <a href="https://www.yourtessera.com/e/summer-social-series-by-chill-movement?rc=t8x47gp0" target="_blank" class="ev-card ev-current">
+          <div class="ev-card-img">
             <img src="images/poster_9.jpg" alt="Summer Social Series"/>
-            <div class="ev-poster-shine"></div>
-            <div class="ev-poster-badge">Tickets Available ↗</div>
-          </a>
-        </div>
+          </div>
+          <div class="ev-card-info">
+            <span class="ev-card-label">The Padel Co. — Bugis</span>
+            <h3>Summer Social Series</h3>
+            <div class="ev-card-bottom">
+              <p>10 &amp; 11 July 2026</p>
+              <span class="ev-ticket-badge">Tickets Available ↗</span>
+            </div>
+          </div>
+        </a>
 
         <!-- PAST EVENTS — faded, most recent first -->
         <div class="ev-card ev-past">
@@ -998,7 +968,7 @@
         </div>
 
       </div>
-      <div class="ev-scroll-hint">← Scroll to explore past events</div>
+      <div class="ev-scroll-hint">Scroll to explore past events →</div>
     </div>
   </div>
 </section>
