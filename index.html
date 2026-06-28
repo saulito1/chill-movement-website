@@ -405,14 +405,14 @@
     }
     .ev-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.12);}
     .ev-card-img{
-      width:260px;
-      height:220px;
+      width:100%;
+      height:260px;
       overflow:hidden;
       position:relative;
     }
     .ev-card-img img{
       width:100%;height:100%;
-      object-fit:contain;background:var(--cream);display:block;
+      object-fit:cover;object-position:top center;display:block;
     }
     .ev-badge{
       position:absolute;bottom:14px;left:50%;
@@ -473,7 +473,8 @@
     .ev-scroll-hint:hover{color:var(--black);}
     @media(max-width:900px){
       .ev-card{width:260px;}
-      .ev-card-img{width:260px;height:220px;}
+      .ev-card-img{width:100%;height:260px;}
+      .ev-card-img img{object-fit:cover;object-position:top center;}
     }
 
     /* ── PARTNERS ── */
@@ -664,10 +665,11 @@
       .mem-inner{grid-template-columns:1fr;gap:56px;}
       .cm-card{width:300px;height:190px;}
       .card-sun{width:220px;height:220px;right:-70px;top:-70px;}
-      /* Events: show full posters — no cropping */
+      /* Events: full-bleed cover */
       #events{padding:80px 24px;}
-      .ev-card{width:200px;}
-      .ev-card-img{width:200px;height:auto;aspect-ratio:4/5;}
+      .ev-card{width:260px;}
+      .ev-card-img{width:100%;height:260px;}
+      .ev-card-img img{object-fit:cover;object-position:top center;}
       .ev-placeholder{padding:60px 24px;}
       #contact{padding:100px 24px;}
       footer{padding:32px 24px;}
@@ -1011,7 +1013,7 @@
         </div>
 
       </div>
-      <div class="ev-scroll-hint">Past Events</div>
+      <button class="ev-scroll-hint" onclick="document.getElementById('evScroll').scrollBy({left:300,behavior:'smooth'})">Past Events <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-left:3px"><path d="M1 5h8M6 2l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 </section>
