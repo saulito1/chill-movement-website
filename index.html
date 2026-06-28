@@ -528,6 +528,7 @@
       position:relative;
       transition:border-color 0.3s,background 0.3s;
       background:rgba(255,255,255,0.03);
+      display:flex;flex-direction:column;
     }
     .wwu-card:hover{
       border-color:rgba(255,255,255,0.2);
@@ -551,10 +552,13 @@
       color:rgba(255,255,255,0.45);
       line-height:1.7;margin-bottom:36px;
       max-width:320px;
+      flex-grow:1;
     }
     .wwu-btn{
       font-size:11px !important;
       padding:12px 24px !important;
+      width:fit-content;
+      align-self:flex-start;
     }
     .logo-strip{
       padding:72px 0 80px;
@@ -993,17 +997,17 @@
     <div class="wwu-cards">
 
       <div class="wwu-card rv d1">
-        <div class="wwu-card-content">
+        <div class="wwu-card-content" style="display:flex;flex-direction:column;flex:1;">
           <h3>Brands &amp; Partners</h3>
-          <p>Companies that want to co-create, activate or sponsor.</p>
+          <p style="flex-grow:1;">Companies that want to co-create, activate or sponsor.</p>
           <a href="#contact" class="btn btn-ow wwu-btn">Get In Touch</a>
         </div>
       </div>
 
       <div class="wwu-card rv d2">
-        <div class="wwu-card-content">
+        <div class="wwu-card-content" style="display:flex;flex-direction:column;flex:1;">
           <h3>Private Events</h3>
-          <p>We bring the experience. You bring the people.</p>
+          <p style="flex-grow:1;">We bring the experience. You bring the people.</p>
           <a href="#contact" class="btn btn-ow wwu-btn">Get In Touch</a>
         </div>
       </div>
