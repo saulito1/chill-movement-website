@@ -472,7 +472,7 @@
     }
 
     /* ── PARTNERS ── */
-    #partners{background:var(--black);padding:100px 0;overflow:hidden;}
+    #partners{background:var(--black);padding:60px 0 0;overflow:hidden;}
     .pt-label{
       text-align:center;font-size:10px;font-weight:500;
       letter-spacing:0.28em;text-transform:uppercase;
@@ -501,7 +501,7 @@
 
     /* ── WORK WITH US ── */
     .work-with-us{
-      padding:120px 52px 80px;
+      padding:60px 52px 80px;
       max-width:1100px;
       margin:0 auto;
     }
@@ -513,9 +513,9 @@
     }
     .wwu-heading{
       font-family:-apple-system,'Helvetica Neue',sans-serif;
-      font-size:clamp(36px,5vw,64px);font-weight:200;
+      font-size:clamp(42px,6vw,80px);font-weight:200;
       line-height:1.05;color:var(--white);
-      letter-spacing:-0.01em;margin-bottom:72px;
+      letter-spacing:-0.01em;margin-bottom:56px;
     }
     .wwu-heading em{font-style:italic;color:rgba(255,255,255,0.4);}
     .wwu-cards{
@@ -638,21 +638,34 @@
     /* ── MOBILE ── */
     @media(max-width:900px){
       nav{padding:0 20px;height:54px;}
-      nav:not(.solid){background:rgba(8,8,8,0.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+      nav:not(.solid){background:rgba(8,8,8,0.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
       .nav-links{display:none;}
       .hamburger{display:flex;}
-      .mission{padding:80px 28px;}
+      /* Hero buttons: ghost/outline style, tighter, more transparent */
+      .hero-btns{flex-direction:column;align-items:center;width:100%;max-width:240px;gap:8px;}
+      .hero-btns .btn{
+        width:100%;text-align:center;
+        padding:11px 20px;font-size:10px;
+        background:rgba(255,255,255,0.08) !important;
+        color:rgba(255,255,255,0.9) !important;
+        border:1px solid rgba(255,255,255,0.25) !important;
+        backdrop-filter:blur(8px);
+        -webkit-backdrop-filter:blur(8px);
+      }
+      /* Mission: less vertical padding so it sits closer to gallery */
+      .mission{padding:60px 28px 50px;}
       .mission-text{font-size:clamp(32px,8vw,52px);}
       #membership{padding:100px 24px;}
       .mem-inner{grid-template-columns:1fr;gap:56px;}
       .cm-card{width:300px;height:190px;}
       .card-sun{width:220px;height:220px;right:-70px;top:-70px;}
-      #events{padding:100px 24px;}
+      /* Events: show full posters — no cropping */
+      #events{padding:80px 24px;}
+      .ev-card{width:200px;}
+      .ev-card-img{width:200px;height:auto;aspect-ratio:4/5;}
       .ev-placeholder{padding:60px 24px;}
       #contact{padding:100px 24px;}
       footer{padding:32px 24px;}
-      .hero-btns{flex-direction:column;align-items:center;width:100%;max-width:280px;}
-      .hero-btns .btn{width:100%;text-align:center;}
       .pt-cta{padding:0 24px;}
       .mob-menu{padding:0 28px;}
       /* Smaller gallery images on mobile */
@@ -664,6 +677,10 @@
       section, .mission, footer, nav, .mob-menu{max-width:100vw;}
       #gallery{overflow:hidden;}
       .lane-wrap{overflow:hidden;}
+      /* Work With Us: tighten top gap */
+      .work-with-us{padding:40px 24px 60px;}
+      .wwu-heading{font-size:clamp(32px,8vw,52px);margin-bottom:40px;}
+      #partners{padding:60px 0 0;}
     }
     @media(max-width:480px){
       .hero-wordmark{letter-spacing:0.16em;}
@@ -680,7 +697,7 @@
   <a href="#events" onclick="closeMenu()">Events</a>
   <a href="#partners" onclick="closeMenu()">Partners</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
-  <a href="https://chat.whatsapp.com/FbYTRdGGZMFE7FIA6ZsLe8" target="_blank" onclick="closeMenu()">Join</a>
+  <a href="https://chat.whatsapp.com/FbYTRdGGZMFE7FIA6ZsLe8" target="_blank" onclick="closeMenu()">Join Us</a>
 </div>
 
 <nav id="mainNav">
@@ -989,7 +1006,7 @@
         </div>
 
       </div>
-      <button class="ev-scroll-hint" onclick="document.getElementById('lastEvent').scrollIntoView({behavior:'smooth',block:'nearest',inline:'end'})">Scroll to explore past events →</button>
+      <div class="ev-scroll-hint">Past Events</div>
     </div>
   </div>
 </section>
